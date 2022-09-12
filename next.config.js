@@ -4,4 +4,9 @@ const nextConfig = {
   swcMinify: true,
 }
 
-module.exports = nextConfig
+module.exports = {
+  nextConfig,
+  env: {
+    SECRET_JWT:'PM9q8ZT&3yG^D$'
+  }
+}
