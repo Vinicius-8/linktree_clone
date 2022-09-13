@@ -1,5 +1,9 @@
-import User from '../../../../models/userModel'
-import connectDB from '../../../../config/db'
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs'
+
+import User from '../../../../models/userModel';
+import connectDB from '../../../../config/db';
+
 
 export default async function handler(req, res){
     await connectDB();
@@ -15,12 +19,17 @@ export default async function handler(req, res){
             //check if the email is already stored
             const userExists = await User.find({email})
 
+            //salting the pass
+            const salt = await bcrypt.genSalt(10)
+            const hashedPassword = await bcrypt.hash(password, salt)
+
 
             if(userExists.length > 0){
                 return res.status(400).json({message: 'User already exists'})
+                
             }else{        
                 // user creation
-                const user = await User.create({name, email, password: password})
+                const user = await User.create({name, email, password: hashedPassword})
 
                 if(user){
                     return res.status(201).json({
@@ -40,7 +49,7 @@ export default async function handler(req, res){
 
 //generate jwt
 const generateToken = (id) => {
-    return jwt.sign({id}, process.env.JWT_SECRET, {
+    return jwt.sign({id}, process.env.SECRET_JWT, {
         expiresIn: '30d'
     })
 }

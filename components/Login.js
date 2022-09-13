@@ -46,7 +46,8 @@ const Login = ({setUser}) => {
                 setUser({
                     id: response._id,
                     name: response.name,
-                    email: response.email
+                    email: response.email,
+                    token: response.token
                 })
                 
             }).catch(error => console.log(error))
@@ -59,9 +60,17 @@ const Login = ({setUser}) => {
                 password
             }
 
-            console.log('----Login----');
-            console.log(userData);
-            console.log('--------');
+            const res = authService.login(userData);
+
+            res.then(response => {
+                setUser({
+                    id: response._id,
+                    name: response.name,
+                    email: response.email,
+                    token: response.token
+                })
+                
+            }).catch(error => console.log(error))
         }
 
        
