@@ -3,7 +3,7 @@ import {useState} from 'react'
 import authService from '../features/auth/authService'
 
 
-const Login = ({setUser}) => {
+const Login = ({ setUser }) => {
     const [register, setRegister] = useState(false);
 
     const [formData, setFormData] = useState({
