@@ -1,11 +1,12 @@
 import {useState} from 'react'
+import { useRouter } from "next/router";
 
 import authService from '../features/auth/authService'
 
 
-const Login = ({ setUser }) => {
+const Login = () => {
     const [register, setRegister] = useState(false);
-
+    const router = useRouter();
     const [formData, setFormData] = useState({
             name:'',
             email: '',
@@ -43,17 +44,13 @@ const Login = ({ setUser }) => {
             const res = authService.registerUser(userData);
             
             res.then(response => {
-                setUser({
-                    id: response._id,
-                    name: response.name,
-                    email: response.email,
-                    token: response.token
-                })
+                console.log('/kids');
+                router.push('/dashboard')
+
                 
             }).catch(error => console.log(error))
 
         }else{
-            
             // apenas login de usuario
             const userData = {
                 email,
@@ -63,25 +60,11 @@ const Login = ({ setUser }) => {
             const res = authService.login(userData);
 
             res.then(response => {
-                setUser({
-                    id: response._id,
-                    name: response.name,
-                    email: response.email,
-                    token: response.token
-                })
-                
+                    
+               router.push('/dashboard')
+
             }).catch(error => console.log(error))
-        }
-
-       
-       //const res = authService.login(userData)
-
-    //    res.then(data => {
-    //     router.reload(window.location.pathname)
-    //    }).catch(()=>{
-    //     alert('O user nao pode ser logado')
-    //    })
-      
+        }      
     }
 
   return (
