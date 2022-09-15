@@ -9,16 +9,14 @@ export default async function handler(req, res){
     await connectDB();
     if(req.method === 'POST'){
         if(req.body){
-
             const {email, password} = req.body;
             
 
             if(!email || !password){ // tem email e senha no request
-                res.status(400).json({message: "Bad request"})
+                return res.status(400).json({message: "Bad request"})
             }
 
             const user = await User.findOne({email})
-
 
             if(!user){ // nao acha o user
                 return res.status(404).json({message:"User not found"})
@@ -28,7 +26,6 @@ export default async function handler(req, res){
             if(!await bcrypt.compare(password, user.password)){ // acha o user mas senha n bate
                 return res.status(301).json({message:"Not authorized"})
             }
-
             return res.status(200).json({
                 _id: user.id,
                 name: user.name,

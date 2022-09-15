@@ -7,16 +7,19 @@ const secret = process.env.SECRET_JWT;
 
 export default function middleware(req){
 
-    // const {cookies} = req;
+    const {cookies} = req;
 
-    // const jwt_token = cookies.token;
+    try{ 
+        const jwt_token = JSON.parse(cookies.get('user')).token;
+    }catch(err){
+        const jwt_token = JSON.parse(cookies.get('user')).token;
+    }
     
-    const cookies = new Cookies();
-    console.log('-------- ---- -');
-    console.log(cookies.get('user'));
 
 
-    // const jwt_token = JSON.parse(localStorage.getItem('user')).token;
+
+    console.log('token: --');
+    console.log(jwt_token)
 
 
     const url =req.url;                                                         /** Criar rota especifica para o login */
@@ -37,7 +40,6 @@ export default function middleware(req){
             NextResponse.next(); // passa pra pagina que tentara acessar
         } catch (error) {
             return NextResponse.redirect(url)
-    
         }
     }
 
