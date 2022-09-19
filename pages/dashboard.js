@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import {useCookies} from 'react-cookie'
+import jwt from 'jsonwebtoken'
 
 import Login from '../components/Login'
 import authService from '../features/auth/authService'
@@ -9,15 +10,15 @@ const Dashboard = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
     useEffect(()=>{
-      // verificar se tem alguem logado se nao go to login page
-      //const userLocal = JSON.parse(localStorage.getItem('user')) // pega o user local
-      console.log('Adeees');
-
+      // verificar se tem alguem logado se nao go to login page      
+      
       try {
           setUser(cookies.user) 
+          jwt.verify(cookies.user.token, process.env.SECRET_JWT)    
+
 
       } catch (error) {
-
+        console.log(error);
         setUser(null)
       }
       

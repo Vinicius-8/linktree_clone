@@ -7,6 +7,7 @@ const nextConfig = {
 module.exports = {
   nextConfig,
   env: {
-    SECRET_JWT:'PM9q8ZT&3yG^D$'
+    SECRET_JWT:'H*hh4cTa8bNkLytzZ$Jk3&yGHDenYGD7f',
+    SERVER: 'http://localhost:3000'
   }
 }

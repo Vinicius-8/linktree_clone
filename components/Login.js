@@ -1,5 +1,6 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { useRouter } from "next/router";
+import {useCookies} from 'react-cookie'
 
 import authService from '../features/auth/authService'
 
@@ -7,6 +8,7 @@ import authService from '../features/auth/authService'
 const Login = () => {
     const [register, setRegister] = useState(false);
     const router = useRouter();
+    const [cookies, setCookie] = useCookies(['user']);
     const [formData, setFormData] = useState({
             name:'',
             email: '',
@@ -14,6 +16,15 @@ const Login = () => {
             password2:'',
         }
     )
+
+
+    useEffect(()=>{
+        // redirec. pra dashboard se ja logado e tentar logar
+        if(cookies.user){
+            router.push('/dashboard')
+        }
+
+    },[])
 
     const onChange = (e) =>{
         setFormData((prevState)=>({
@@ -44,7 +55,6 @@ const Login = () => {
             const res = authService.registerUser(userData);
             
             res.then(response => {
-                console.log('/kids');
                 router.push('/dashboard')
 
                 

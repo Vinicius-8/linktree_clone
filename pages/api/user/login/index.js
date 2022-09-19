@@ -1,6 +1,7 @@
-
 import jwt from 'jsonwebtoken';
+import * as jose from 'jose'
 import bcrypt from 'bcryptjs'
+import crypto from 'crypto'
 
 import User from '../../../../models/userModel';
 import connectDB from '../../../../config/db';
@@ -37,8 +38,28 @@ export default async function handler(req, res){
 }
 
 const generateToken = (id) => {
-    return jwt.sign({id}, process.env.SECRET_JWT, {
-        algorithm: 'RS256',
-        expiresIn: '30d',
-    })
+    // const secret =  crypto.createSecretKey(process.env.SECRET_JWT)
+
+    
+    return jwt.sign(
+            {id}, 
+            process.env.SECRET_JWT,
+            { 
+                expiresIn: '30d', 
+            }
+        );
+
+    
 }
+
+// const generateToken = async (id) => {
+//     const secretKey = crypto.createSecretKey(process.env.SECRET_JWT)
+//     const token  = await new jose.SignJWT({ id})
+//     .setProtectedHeader({  alg: 'HS256'})
+//     .setExpirationTime('30d')
+//     .sign(secretKey);
+
+//     console.log(token);
+
+//   return token
+// }
