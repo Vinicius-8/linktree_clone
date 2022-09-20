@@ -1,7 +1,5 @@
 import jwt from 'jsonwebtoken';
-import * as jose from 'jose'
 import bcrypt from 'bcryptjs'
-import crypto from 'crypto'
 
 import User from '../../../../models/userModel';
 import connectDB from '../../../../config/db';
