@@ -11,6 +11,7 @@ const Login = () => {
     const [cookies, setCookie] = useCookies(['user']);
     const [formData, setFormData] = useState({
             name:'',
+            nickname:'',
             email: '',
             password:'',
             password2:'',
@@ -33,7 +34,7 @@ const Login = () => {
         }))
     }
 
-    const {name, email, password, password2} = formData
+    const {name,nickname, email, password, password2} = formData
 
     const onSubmit = (e)=>{ // para o form do submit
         e.preventDefault()
@@ -45,35 +46,30 @@ const Login = () => {
                 return
             }
 
-            const userData = {
-                name,
-                email,
-                password,
-                password2
-            }
-
+            const userData = { name, email, nickname, password, password2 }
+            
             const res = authService.registerUser(userData);
             
-            res.then(response => {
-                router.push('/dashboard')
-
-                
-            }).catch(error => console.log(error))
+            res.then(response => {                
+                router.reload()                
+            }).catch(error => {
+                const resp = 'user cant be created: '+  error.response.data.message
+                alert(resp);
+            })
 
         }else{
             // apenas login de usuario
-            const userData = {
-                email,
-                password
-            }
+            const userData = { email, password }
 
             const res = authService.login(userData);
 
             res.then(response => {
-                    
-               router.push('/dashboard')
+               router.reload()
 
-            }).catch(error => console.log(error))
+            }).catch(error => {
+                const resp = 'cant login: '+  error.response.data.message
+                alert(resp);
+            })
         }      
     }
 
@@ -112,6 +108,12 @@ const Login = () => {
         <form onSubmit={onSubmit}>
             <div>
                 <input type="text" id='name' name='name' value={name} placeholder='enter your name'
+                    onChange={onChange}
+                />
+            </div>
+
+            <div>
+                <input type="text" id='nickname' name='nickname' value={nickname} placeholder='enter your nickname'
                     onChange={onChange}
                 />
             </div>

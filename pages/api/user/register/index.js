@@ -11,30 +11,32 @@ export default async function handler(req, res){
         if(req.body){
 
             // checks for existing of data to be stored
-            const {name, email, password } = req.body
-            if(!name || !email || !password){
+            const {name, nickname, email, password } = req.body
+            if(!name || !nickname || !email || !password){
                 return res.status(400).json({message: 'Bad request, some fields might be missing'})
             }
 
             //check if the email is already stored
             const userExists = await User.find({email})
+            const nicknameExists = await User.find({nickname})
 
             //salting the pass
             const salt = await bcrypt.genSalt(10)
             const hashedPassword = await bcrypt.hash(password, salt)
 
 
-            if(userExists.length > 0){
-                return res.status(400).json({message: 'User already exists'})
+            if(userExists.length > 0 || nicknameExists.length > 0){
+                return res.status(400).json({message: 'User/nickname already exists'})
                 
             }else{        
                 // user creation
-                const user = await User.create({name, email, password: hashedPassword})
+                const user = await User.create({name, nickname, email, password: hashedPassword})
 
                 if(user){
                     return res.status(201).json({
                         _id: user.id,
                         name: user.name,
+                        nickname: user.nickname,
                         username: user.email,
                         token: generateToken(user.id)
                     })

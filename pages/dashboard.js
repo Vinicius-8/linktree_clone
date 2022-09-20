@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 
 import Login from '../components/Login'
 import authService from '../features/auth/authService'
+import CreateSocial from '../components/CreateSocial'
 
 const Dashboard = () => {
     const [user, setUser] = useState(null);
@@ -18,7 +19,7 @@ const Dashboard = () => {
 
 
       } catch (error) {
-        console.log(error);
+        //console.log(error);
         setUser(null)
       }
       
@@ -33,6 +34,7 @@ const Dashboard = () => {
           authService.logout()
           setUser(null);
           }}>Logout</button>
+        <CreateSocial />
         </>
         
         :

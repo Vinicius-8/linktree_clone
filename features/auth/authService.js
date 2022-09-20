@@ -19,9 +19,11 @@ const login  = async(userData) =>{
 const registerUser = async(userData)=>{
     const response = await axios.post(server + API_URL + 'register', userData)
     
-    if(response.data){
+    if(response.data){    
         setCookie('user', JSON.stringify(response.data));
     }
+
+    console.log('response d:? ', response.data)
     return response.data
 }
 

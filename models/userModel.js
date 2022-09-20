@@ -5,6 +5,11 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, 'please add an name']
     },
+    nickname:{
+        type: String,
+        required: [true, 'please add an nickname'],
+        unique: true
+    },
     email :{
         type: String,
         required: [true, 'please add an email'],
