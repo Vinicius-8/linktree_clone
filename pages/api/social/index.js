@@ -17,11 +17,12 @@ export default async function handler(req, res){
             
 
             if(!social || !link){ // tem social e link no request
+                console.log(social , ' -- ', link);
                 return res.status(400).json({message: "Bad request"})
             }
 
-            const socialCreated = await Social.create({social, link, userId})
-
+            const socialCreated = await Social.create({social, link, userId});
+            
             return res.status(200).json({
                 _id: socialCreated.id,
                 social: socialCreated.social,

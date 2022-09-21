@@ -1,9 +1,12 @@
 import { useState } from "react"
 import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
+
 import socialController from '../features/controller/socialController'
 
 const CreateSocial = () => {
   const [cookies, setCookie] = useCookies(['user']);
+  const router = useRouter();
   const [formData, setFormData] = useState({
       name:'',
       nickname:'',
@@ -27,8 +30,9 @@ const CreateSocial = () => {
   
     const res = socialController.createSocial(formData, cookies.user.token);
             
-      res.then(response => {                
-          router.reload()                
+      res.then(() => {                
+          router.reload() 
+
       }).catch(error => {
           const resp = 'social cant be created: '+  error.response.data.message
           alert(resp);

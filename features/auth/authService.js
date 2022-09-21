@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { setCookie, deleteCookie } from 'cookies-next';
-import { jwt } from 'jsonwebtoken';
+import { decodeJwt } from 'jose';
 
 
 import { server } from '../../config';
@@ -34,12 +34,12 @@ const authToken = async (req) =>{
     if(req.headers.authorization && req.headers.authorization.includes('Bearer')){
         try {
             //get token from header
+            
             let splitAuth = req.headers.authorization.split(' ')
-            token = splitAuth[0] === 'Bearer'? splitAuth[1] : splitAuth[0];
-        
+            token = splitAuth[0] === 'Bearer'? splitAuth[1] : splitAuth[0];        
+            
             // verify token
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
+            const decoded = decodeJwt(token, process.env.SECRET_JWT); 
             return decoded.id;
             
         } catch (error) {

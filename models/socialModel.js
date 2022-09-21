@@ -8,13 +8,11 @@ const socialSchema = mongoose.Schema({
     link :{
         type: String,
         required: [true, 'please add an link'],
-        unique: true
     },
 
     userId :{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: [true, 'please add an user id'],
-        unique: true
     }
 
 }, {
