@@ -28,7 +28,8 @@ export default async function handler(req, res){
             return res.status(200).json({
                 _id: user.id,
                 name: user.name,
-                username: user.email,
+                email: user.email,
+                nickname: user.nickname,
                 token: generateToken(user._id)
             });
         }

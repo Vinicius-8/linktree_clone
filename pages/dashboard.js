@@ -17,6 +17,7 @@ const Dashboard = () => {
       try {
           setUser(cookies.user) 
           jwt.verify(cookies.user.token, process.env.SECRET_JWT)    
+          console.log("all: ", user)
       } catch (error) {
         //console.log(error);
         setUser(null)
@@ -28,13 +29,13 @@ const Dashboard = () => {
     <div>
         {user? 
         <>
-        usuario logado: {user.name}
+        usuario logado: {user.name} - {user.nickname}
         <button onClick={()=> {
           authService.logout()
           setUser(null);
           }}>Logout</button>
         {/* <CreateSocial /> */}
-        <ListSocialDashboard token={user.token} userId={user.id}/>
+        <ListSocialDashboard token={user.token} userNickname={user.nickname}/>
         </>
         
         :
