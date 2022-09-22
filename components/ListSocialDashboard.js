@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import socialController from '../features/controller/socialController'
 
-const ListSocialDashboard = ({token, userNickname}) => {
+const ListSocialDashboard = ({userNickname}) => {
     const [socials, setSocials] = useState([]);
 
     useEffect( ()=>{
@@ -11,7 +11,7 @@ const ListSocialDashboard = ({token, userNickname}) => {
     },[])
 
     function fetchAllSocials(){
-      socialController.getSocials(token, userNickname)
+      socialController.getSocials(userNickname)
       .then(res => setSocials(res.socials))
       .catch(err => console.log('err: ', err))
     }

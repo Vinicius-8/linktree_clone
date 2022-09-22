@@ -1,7 +1,6 @@
 import connectDB from '../../../config/db';
 import Social from '../../../models/socialModel.js';
 import User from '../../../models/userModel.js';
-import authService from '../../../features/auth/authService';
 
 /**
  * 

@@ -27,9 +27,9 @@ const updateSocial  = async(socialId, socialData, token) =>{
  * @param {String} token do usuario
  * @returns 
  */
-const getSocials = async(token, userNickname)=>{
+const getSocials = async(userNickname)=>{
     const config = {
-        headers: { Authorization: `Bearer ${token}` }
+        //headers: { Authorization: `Bearer ${token}` }
     };
     const response = await axios.get(server + API_URL + userNickname , config=config)
     return response.data
