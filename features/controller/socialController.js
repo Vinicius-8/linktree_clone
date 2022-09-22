@@ -31,7 +31,7 @@ const getSocials = async(token)=>{
     const config = {
         headers: { Authorization: `Bearer ${token}` }
     };
-    const response = await axios.get(server + API_URL + 'all', config=config)
+    const response = await axios.get(server + API_URL , config=config)
     return response.data
 }
 

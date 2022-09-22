@@ -11,7 +11,7 @@ const socialSchema = mongoose.Schema({
     },
 
     userId :{
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         required: [true, 'please add an user id'],
     }
 

@@ -1,6 +1,7 @@
 import connectDB from '../../../config/db';
 import Social from '../../../models/socialModel.js';
 import authService from '../../../features/auth/authService';
+import { ObjectId } from 'mongoose';
 
 export default async function handler(req, res){
     await connectDB();
@@ -30,5 +31,7 @@ export default async function handler(req, res){
                 userId: socialCreated.userId
             });
         }
+    }else if(req.method === 'GET'){
+        console.log('oia nois denovo');
     }
 }

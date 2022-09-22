@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 import Login from '../components/Login'
 import authService from '../features/auth/authService'
 import CreateSocial from '../components/CreateSocial'
+import ListSocialDashboard from '../components/ListSocialDashboard'
 
 const Dashboard = () => {
     const [user, setUser] = useState(null);
@@ -16,8 +17,6 @@ const Dashboard = () => {
       try {
           setUser(cookies.user) 
           jwt.verify(cookies.user.token, process.env.SECRET_JWT)    
-
-
       } catch (error) {
         //console.log(error);
         setUser(null)
@@ -34,7 +33,8 @@ const Dashboard = () => {
           authService.logout()
           setUser(null);
           }}>Logout</button>
-        <CreateSocial />
+        {/* <CreateSocial /> */}
+        <ListSocialDashboard token={user.token} userId={user.id}/>
         </>
         
         :
