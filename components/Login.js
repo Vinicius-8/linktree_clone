@@ -46,6 +46,11 @@ const Login = () => {
                 return
             }
 
+            if(nickname === 'dashboard'){
+                alert('Nickname já utilizado')
+                return
+            }
+
             const userData = { name, email, nickname, password, password2 }
             
             const res = authService.registerUser(userData);

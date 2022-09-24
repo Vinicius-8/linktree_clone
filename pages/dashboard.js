@@ -6,6 +6,8 @@ import Login from '../components/Login'
 import authService from '../features/auth/authService'
 import CreateSocial from '../components/CreateSocial'
 import ListSocialDashboard from '../components/ListSocialDashboard'
+import DashboardStyles from '../styles/Dashboard.module.css'
+
 
 const Dashboard = () => {
     const [user, setUser] = useState(null);
@@ -26,14 +28,20 @@ const Dashboard = () => {
     },[])
 
   return (
-    <div>
+    <div className={DashboardStyles.container}>
         {user? 
         <>
-        usuario logado: {user.name} - {user.nickname}
-        <button onClick={()=> {
-          authService.logout()
-          setUser(null);
-          }}>Logout</button>
+        <div className={DashboardStyles.header}>
+          <div></div>
+            <span className={DashboardStyles.userName}>{user.name}</span>
+          
+          <button 
+            className={DashboardStyles.logoutButton}
+          onClick={()=> {
+            authService.logout()
+            setUser(null);
+            }}>Logout</button>
+        </div>
         {/* <CreateSocial /> */}
         <ListSocialDashboard token={user.token} userNickname={user.nickname}/>
         </>

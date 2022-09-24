@@ -9,9 +9,9 @@ import UserPageStyles from '../../styles/UserPage.module.css'
 const UserPage = () => {
   // const [socials, setSocials] = useState([]);
   const [socials, setSocials] = useState([
-    {id:1, social: "Instagram", link: "www.instagram.com/vini"},
-    {id:2, social: "Facebook", link: "www.facebook.com/vinicius-vieria"},
-    {id:3, social: "Linkedin", link: "www.linkedin.com/vinicius-vieira-de-araujo"}
+    {id:1, social: "Instagram", link: "https://www.instagram.com/vini"},
+    {id:2, social: "Facebook", link: "https://www.facebook.com/vinicius-vieria"},
+    {id:3, social: "Linkedin", link: "https://www.linkedin.com/vinicius-vieira-de-araujo"}
   ]);
   const [is404, setIs404] = useState(false)
   const router = useRouter()
@@ -41,8 +41,12 @@ const UserPage = () => {
     <div className={UserPageStyles.innerContainer}>
       <span className={UserPageStyles.titleUser}>@{nickname}</span>
       {socials.map(social => (
-      <div key={social._id} className={UserPageStyles.socialCell}>        
-            <span>{social.social}</span>
+
+      <div key={social._id}>
+        <a href={social.link} target="_blank" style={{textDecoration: "inherit", color:  "inherit",cursor: "auto"}}>
+        <div  className={UserPageStyles.socialCell}>              
+              <span>{social.social}</span>    
+        </div></a>    
       </div>
     ))}  
     

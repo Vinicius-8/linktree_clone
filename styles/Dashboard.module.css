@@ -1,0 +1,68 @@
+.container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    height: 10%;    
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 10% 80% 10%;
+}
+
+.userName{
+    font-size: 15pt;
+    font-weight: 500;
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoutButton{
+    background-color: #fff;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+
+    
+}
+.logoutButton:hover{
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+
+.socialListContainer{
+    display: grid;
+    justify-content: center;
+}
+
+.socialCell{
+    width: 700px;
+    height: 100px;
+    background-color: #e2e2e2;
+    border-radius: 3px;
+    margin-top: 20px;
+}
+
+.socialInput {
+    box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	outline: none;
+	display: block;
+	width: 100%;
+	padding: 7px;
+	border: none;
+	border-bottom: 1px solid #ddd;
+	background: transparent;
+	margin-bottom: 10px;
+	font: 16px Arial, Helvetica, sans-serif;
+	height: 45px;
+}
