@@ -19,7 +19,6 @@ const Dashboard = () => {
       try {
           setUser(cookies.user) 
           jwt.verify(cookies.user.token, process.env.SECRET_JWT)    
-          console.log("all: ", user)
       } catch (error) {
         //console.log(error);
         setUser(null)

@@ -2,6 +2,12 @@ import connectDB from '../../../config/db';
 import Social from '../../../models/socialModel.js';
 import authService from '../../../features/auth/authService';
 
+
+/**     
+ *      route: /api/social/
+ * 
+ * Handler for create and update of social
+ */
 export default async function handler(req, res){
     await connectDB();
 
@@ -29,10 +35,49 @@ export default async function handler(req, res){
                 userId: socialCreated.userId
             });
         }
+    }else if(req.method === 'PUT'){
+        // updating the user social
+        if(req.body){
+            console.log('body: ', req.body)
+            const {_id, social, link, userIdOwner} = req.body;
+            
+            if(userId !== userIdOwner){ // confirms that the social belongs to him
+                console.log(userId , ' - - ', userIdOwner)
+                return res.status(401).json({message: "The user don't own the social"})
+            }
+
+            const updatedSocial = await Social.findOneAndUpdate({_id}, { social, link })
+
+
+            if(updatedSocial){
+                return res.status(200).json(updatedSocial)
+            }
+            
+            return res.status(500).json({message: 'The social was not updated'})
+
+        }
+
+        return res.status(401).json({message: "Can't update "})
+        
+    } else if(req.method === 'DELETE'){
+        
+        if(req.body){
+            const {_id, userIdOwner} =  req.body;
+
+            if(userId !== userIdOwner){ // confirms that the social belongs to him
+                return res.status(401).json({message: "The user don't own the social"})
+            }
+
+            const deletedSocial = await Social.deleteOne({_id});
+
+            if(deletedSocial){
+                return res.status(200).json(deletedSocial)
+            }
+
+            return res.status(500).json({message: "Can't delete the item"})
+        }
+
+        return res.status(401).json({message: "Can't delete "})
     }
     
-    // else if(req.method === 'GET'){
-    //     console.log('oia nois denovo');
-    //     return res.status(200).json({message: 'tudo file'})
-    // }
 }

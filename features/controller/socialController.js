@@ -4,6 +4,8 @@ import { server } from '../../config';
 
 const API_URL = '/api/social/';
 
+
+// CREATE
 const createSocial  = async(socialData, token) =>{
     const config = {
         headers: { Authorization: `Bearer ${token}` }
@@ -13,12 +15,14 @@ const createSocial  = async(socialData, token) =>{
     return response.data;
 }
 
-const updateSocial  = async(socialId, socialData, token) =>{
+
+// UPDATE
+const updateSocial  = async(socialData, token) =>{
     const config = {
         headers: { Authorization: `Bearer ${token}` }
     };
-
-    const response = await axios.put(server + API_URL + socialId, socialData, config)
+    
+    const response = await axios.put(server + API_URL, socialData, config)
     return response.data;
 }
 
@@ -27,6 +31,8 @@ const updateSocial  = async(socialId, socialData, token) =>{
  * @param {String} token do usuario
  * @returns 
  */
+
+// GET
 const getSocials = async(userNickname)=>{
     const config = {
         //headers: { Authorization: `Bearer ${token}` }
@@ -36,11 +42,14 @@ const getSocials = async(userNickname)=>{
 }
 
 
-const deleteSocial= async(token, socialId)=>{
+// DELETE
+const deleteSocial= async( social, token)=>{
     const config = {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
+        data: social
     };
-    const response = await axios.delete(server + API_URL + socialId, config=config)
+
+    const response = await axios.delete(server + API_URL, config)
     return response.data
 }
 

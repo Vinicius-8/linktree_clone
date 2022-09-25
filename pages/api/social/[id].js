@@ -2,34 +2,41 @@ import connectDB from '../../../config/db';
 import Social from '../../../models/socialModel.js';
 import User from '../../../models/userModel.js';
 
+
 /**
  * 
- * rota dedicada a pegar todos as socials de um user. ex: /api/socials/{userNickname}
+ * route for dynamic id from user. ex: /api/socials/{userNickname}
  * 
- * @param {*} id  // id do usuario
+ * @param {*} id  // user id
  * @param {*} res 
  * @returns 
  */
-export default async function handler(req, res){
-    const {query: {id}} = req;
-    
-    if(!id || id === 'undefined'){
-        return res.status(404).json({message: 'not found'})
-    }
+export default async function handler(req, res){ // handler of dynamic id ID
+    if(req.method === 'GET'){
+        /**
+         * Delivery all the socials from a user, this route is public
+         */
 
-    await connectDB();
-    
-    const user = await User.findOne({nickname: id})
+        const {query: {id}} = req;
+        
+        if(!id || id === 'undefined'){
+            return res.status(404).json({message: 'not found'})
+        }
 
-    if(!user){
-        return res.status(404).json({message: 'User not found'})
-    }
+        await connectDB();
+        
+        const user = await User.findOne({nickname: id})
+
+        if(!user){
+            return res.status(404).json({message: 'User not found'})
+        }
 
 
-    // an id from a specific nickname 
-    const userId = user._id;
+        // an id from a specific nickname 
+        const userId = user._id;
 
-    const allSocials = await Social.find({userId})
+        const allSocials = await Social.find({userId})
 
-    return res.status(200).json({socials: allSocials})
+        return res.status(200).json({socials: allSocials})
+    } 
 }
