@@ -6,7 +6,7 @@ import socialController from '../features/controller/socialController'
 import DashboardStyles from '../styles/Dashboard.module.css'
 
 
-const ListSocialDashboard = ({userNickname}) => {
+const ListSocialDashboard = ({userNickname, setIsCreating}) => {
     
     const [socials, setSocials] = useState([]);
 
@@ -19,7 +19,13 @@ const ListSocialDashboard = ({userNickname}) => {
 
     function fetchAllSocials(){
       socialController.getSocials(userNickname)
-      .then(res => setSocials(res.socials))
+      .then(res => {
+        if(res.socials.length < 1){
+          console.log('len', socials.length);
+          setIsCreating(true)
+        }
+        setSocials(res.socials);
+      })
       .catch(err => console.log('err: ', err))
     }
 
@@ -28,13 +34,15 @@ const ListSocialDashboard = ({userNickname}) => {
 
   return (
     <>
-   
-      <div className={DashboardStyles.socialListContainer}>
-      {socials.map(social => (
-        <SocialDashboardCell socialData={social} key={social._id}/>
-      ))}
+      <div className={DashboardStyles.createSocialContainerParent}>
+        <span style={{textAlign:"center",fontSize: "14pt", fontWeight:'400', marginTop: '15px' }}>Your social networks:</span>
+        {socials.map(social => (
+          <div className={DashboardStyles.createSocialContainer} style={{height: '245px'}}>
+          <SocialDashboardCell socialData={social} key={social._id}/>
+          </div>
+        ))}
+        
       </div>
-
     </>
   )
 }

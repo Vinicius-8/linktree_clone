@@ -47,6 +47,7 @@
     background: linear-gradient(145deg, #ffffff, #e6e6e6);
     box-shadow:  3px 3px 2px #fafafa,
                  -3px -3px 2px #ffffff;
+    
 }
 
 .socialCell:hover{

@@ -35,6 +35,9 @@ export default async function handler(req, res){
                 userId: socialCreated.userId
             });
         }
+
+        return res.status(400).json({message: "Bad request"})
+
     }else if(req.method === 'PUT'){
         // updating the user social
         if(req.body){
