@@ -37,9 +37,8 @@ const ListSocialDashboard = ({userNickname, setIsCreating}) => {
       <div className={DashboardStyles.createSocialContainerParent}>
         <span style={{textAlign:"center",fontSize: "14pt", fontWeight:'400', marginTop: '15px' }}>Your social networks:</span>
         {socials.map(social => (
-          <div className={DashboardStyles.createSocialContainer} style={{height: '245px'}}>
+          
           <SocialDashboardCell socialData={social} key={social._id}/>
-          </div>
         ))}
         
       </div>

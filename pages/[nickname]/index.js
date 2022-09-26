@@ -7,23 +7,23 @@ import UserPageStyles from '../../styles/UserPage.module.css'
 
 
 const UserPage = () => {
-  // const [socials, setSocials] = useState([]);
-  const [socials, setSocials] = useState([
-    {id:1, social: "Instagram", link: "https://www.instagram.com/vini"},
-    {id:2, social: "Facebook", link: "https://www.facebook.com/vinicius-vieria"},
-    {id:3, social: "Linkedin", link: "https://www.linkedin.com/vinicius-vieira-de-araujo"}
-  ]);
+  const [socials, setSocials] = useState([]);
+  // const [socials, setSocials] = useState([
+  //   {id:1, social: "Instagram", link: "https://www.instagram.com/vini"},
+  //   {id:2, social: "Facebook", link: "https://www.facebook.com/vinicius-vieria"},
+  //   {id:3, social: "Linkedin", link: "https://www.linkedin.com/vinicius-vieira-de-araujo"}
+  // ]);
   const [is404, setIs404] = useState(false)
   const router = useRouter()
   const {nickname} = router.query
   
   
   useEffect(()=>{
-    // if(!nickname)
-    //   return
-    //   socialController.getSocials(nickname)
-    //     .then(res => {setSocials(res.socials); setIs404(false);})
-    //     .catch(() =>{ setSocials(null); setIs404(true)})
+    if(!nickname)
+      return
+      socialController.getSocials(nickname)
+        .then(res => {setSocials(res.socials); setIs404(false);})
+        .catch(() =>{ setSocials(null); setIs404(true)})
     
   })
 

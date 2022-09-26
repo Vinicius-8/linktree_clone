@@ -4,6 +4,8 @@ import {useCookies} from 'react-cookie'
 
 import authService from '../features/auth/authService'
 
+import LoginRegister from '../styles/LoginRegister.module.css'
+
 
 const Login = () => {
     const [register, setRegister] = useState(false);
@@ -84,74 +86,106 @@ const Login = () => {
     {!register ? 
 
         // just login user
-    <div>
-        <form onSubmit={onSubmit}>
-            <div>
+    <div className={LoginRegister.LRContainer}>
+        <div className={LoginRegister.LRInnerContainer}>
+            <div className={LoginRegister.LRTitle}>Login</div>
+            <form onSubmit={onSubmit}>
+                <div>
 
-                <input type="text" id='email' name='email' value={email} placeholder='enter your email'
-                    onChange={onChange}
-                />
-            </div>
+                    <input type="text" id='email' name='email' value={email} placeholder='Enter your email'
+                        className={LoginRegister.LRInput}
+                        onChange={onChange}
+                    />
+                </div>
 
-            <div>
-                <input type="password" className="form" id='password' name='password' value={password} placeholder='enter your password'
-                onChange={onChange}
-                />
+                <div>
+                    <input type="password"  id='password' name='password' value={password} placeholder='Enter your password'
+                        className={LoginRegister.LRInput}
+                        onChange={onChange}
+                    />
+                </div>
+                
+            <div className={LoginRegister.LRButtonContainer}>
+                <div className={LoginRegister.LRButtonInnerContainer}>
+                    <div>
+                        <button type="submit"
+                            className={LoginRegister.LRButton}
+                        >Login</button>
+                    </div>
+                    <div>
+                        <button
+                        className={LoginRegister.LRButton}
+                        onClick={()=> setRegister(true)}>Register</button>
+                    </div>
+                </div>
             </div>
+            </form>
             
-            <div>
-              <button type="submit">Login</button>
-            </div>
-      </form>
-        <div>
-            <button onClick={()=> setRegister(true)}>Register</button>
         </div>
     </div>:
     
     // register user
-    <div>
-        <form onSubmit={onSubmit}>
-            <div>
-                <input type="text" id='name' name='name' value={name} placeholder='enter your name'
+    <div className={LoginRegister.LRContainer}>
+        <div className={LoginRegister.LRInnerContainer}>
+            <form onSubmit={onSubmit}>
+                <div className={LoginRegister.LRSpanLabel}>Name: </div>
+                <div>
+                    <input type="text" id='name' name='name' value={name} placeholder='Enter your name'
+                        className={LoginRegister.LRInput}
+                        onChange={onChange}
+                    />
+                </div>
+                <div className={LoginRegister.LRSpanLabel}>Nickname: </div>
+                <div>
+                
+                    <input type="text" id='nickname' name='nickname' value={nickname} placeholder='Enter your nickname'
+                        className={LoginRegister.LRInput}
+                        onChange={onChange}
+                    />
+                </div>
+
+                <div className={LoginRegister.LRSpanLabel}>Email: </div>
+                <div>
+
+                    <input type="text" id='email' name='email' value={email} placeholder='Enter your email'
+                        className={LoginRegister.LRInput}
+                        onChange={onChange}
+                    />
+                </div>
+
+                <div className={LoginRegister.LRSpanLabel}>Password: </div>
+                <div>
+                    <input type="password" id='password' name='password' value={password} placeholder='Enter your password'
+                    className={LoginRegister.LRInput}
                     onChange={onChange}
-                />
-            </div>
+                    />
+                </div>
 
-            <div>
-                <input type="text" id='nickname' name='nickname' value={nickname} placeholder='enter your nickname'
+                <div className={LoginRegister.LRSpanLabel}>Repeat Password: </div>
+                <div>
+                    <input type="password" id='password2' name='password2' value={password2} placeholder='Enter your password again'
+                    className={LoginRegister.LRInput}
                     onChange={onChange}
-                />
-            </div>
+                    />
+                </div>
+                
 
-            <div>
+                <div className={LoginRegister.LRButtonContainer}>
+                    <div className={LoginRegister.LRButtonInnerContainer}>
+                        <div>
+                            <button className={LoginRegister.LRButton} type="submit">Register</button>
+                        </div>
 
-                <input type="text" id='email' name='email' value={email} placeholder='enter your email'
-                    onChange={onChange}
-                />
-            </div>
-
-            <div>
-                <input type="password" className="form" id='password' name='password' value={password} placeholder='enter your password'
-                onChange={onChange}
-                />
-            </div>
-
-            <div>
-                <input type="password" className="form" id='password2' name='password2' value={password2} placeholder='enter your password again'
-                onChange={onChange}
-                />
-            </div>
+                        <div>
+                            <button  className={LoginRegister.LRButton} onClick={()=> setRegister(false)}>I already have an account</button>
+                        </div>
+                    </div>
+                </div>
+        </form>
             
-            <div>
-              <button type="submit">Register</button>
-            </div>
-      </form>
-        
-        <div>
-            <button onClick={()=> setRegister(false)}>I already have an account</button>
+            
         </div>
     </div>
-    
     }
     </>
   )

@@ -60,19 +60,21 @@ const SocialDashboardCell = ({socialData}) => {
   return (
     <div>
         {isVisible ? 
-        <div>
-            <div className={DashboardStyles.createSocialTitle}></div>
-            <div className={DashboardStyles.socialCell}>
-            
-                    <input className={DashboardStyles.socialInput} onChange={onChange} type="text" id='social' name='social' value={social} placeholder='enter your social network' /> <br/>
-                    <input className={DashboardStyles.socialInput} onChange={onChange}  type="text" id='link' name='link' value={link} placeholder='enter your social link' /> <br ></br>                                    
+        <div className={DashboardStyles.createSocialContainer} style={{height: '245px'}}>
+            <div>
+                <div className={DashboardStyles.createSocialTitle}></div>
+                <div className={DashboardStyles.socialCell}>
                 
-            </div>     
-            <div className={DashboardStyles.updateDeleteButtonContainer}>
-                <button style={{marginLeft: '20px', marginRight: '0px'}}  className={DashboardStyles.createCancelButton} onClick={deleteSocial}> Delete </button>
-                <button style={{marginLeft: '20px', marginRight: '0px'}} className={DashboardStyles.createCancelButton} onClick={updateSocial}> Update </button>
+                        <input className={DashboardStyles.socialInput} onChange={onChange} type="text" id='social' name='social' value={social} placeholder='enter your social network' /> <br/>
+                        <input className={DashboardStyles.socialInput} onChange={onChange}  type="text" id='link' name='link' value={link} placeholder='enter your social link' /> <br ></br>                                    
+                    
+                </div>     
+                <div className={DashboardStyles.updateDeleteButtonContainer}>
+                    <button style={{marginLeft: '20px', marginRight: '0px'}}  className={DashboardStyles.createCancelButton} onClick={deleteSocial}> Delete </button>
+                    <button style={{marginLeft: '20px', marginRight: '0px'}} className={DashboardStyles.createCancelButton} onClick={updateSocial}> Update </button>
+                </div>
+                <ToastContainer position="top-left" theme='colored' autoClose="1200" />   
             </div>
-            <ToastContainer position="top-left" theme='colored' autoClose="1200" />   
         </div>
         : <></> }
     </div>
