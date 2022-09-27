@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import { useRouter } from "next/router";
 import {useCookies} from 'react-cookie'
+import { ToastContainer, toast } from 'react-toastify';
 
 import authService from '../features/auth/authService'
 
@@ -54,7 +55,7 @@ const Login = () => {
             }
 
             const userData = { name, email, nickname, password, password2 }
-            
+            toast("Creating", {type: "success"})
             const res = authService.registerUser(userData);
             
             res.then(response => {                
@@ -67,9 +68,9 @@ const Login = () => {
         }else{
             // apenas login de usuario
             const userData = { email, password }
-
+            toast("Loading!", {type: "success"})
             const res = authService.login(userData);
-
+            
             res.then(response => {
                router.reload()
 
@@ -82,7 +83,7 @@ const Login = () => {
 
   return (
     <>
-   
+    <ToastContainer position="top-left" theme='colored' autoClose="1200" />
     {!register ? 
 
         // just login user

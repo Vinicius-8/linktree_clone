@@ -28,6 +28,11 @@ const registerUser = async(userData)=>{
     return response.data
 }
 
+const getAllUsers = async ()=>{
+    const response = await axios.get(server + API_URL + 'all')
+    return response.data
+}
+
 
 const authToken = async (req) =>{
     let token;
@@ -65,6 +70,7 @@ const authService = {
     logout,
     login,
     registerUser,
-    authToken
+    authToken,
+    getAllUsers
 }
 export default authService;
