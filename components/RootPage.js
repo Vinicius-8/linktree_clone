@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import authService from "../features/auth/authService"
 import HomeStyles from '../styles/Home.module.css'
@@ -9,10 +9,24 @@ const RootPage = () => {
     const [users, setUsers] = useState([]);
 
     
-    const res = authService.getAllUsers();
+
+
+    useEffect(()=>{
+      if(!users)
+      return
+
+      function getAllUsers(){
+        const res = authService.getAllUsers(); ////////////////////
   
-    res.then(res => {setUsers(res.users)})
-      .catch(err => {console.log(err)})
+        res.then(res => {setUsers(res.users)})
+          .catch(err => {console.log(err)});
+      }
+
+      getAllUsers();
+      
+    }, [users])
+
+    
   
   
     return (
@@ -30,7 +44,7 @@ const RootPage = () => {
             <div className={HomeStyles.homeInnerContainer}>
   
               {users.map(item => (
-                <div className={HomeStyles.userPageContainer} onClick={()=>router.push('/'+item.nickname)}>
+                <div className={HomeStyles.userPageContainer} onClick={()=>router.push('/'+item.nickname)} key={item._id}>
                   <div className={HomeStyles.userPageGreenBar}></div>
                   <div className={HomeStyles.userPageTitle}>{item.name}</div>
                 <div className={HomeStyles.userPageSubtitle}>@{item.nickname}</div>

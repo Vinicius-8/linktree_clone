@@ -11,7 +11,7 @@ import LoginRegister from '../styles/LoginRegister.module.css'
 const Login = () => {
     const [register, setRegister] = useState(false);
     const router = useRouter();
-    const [cookies, setCookie] = useCookies(['user']);
+    
     const [formData, setFormData] = useState({
             name:'',
             nickname:'',
@@ -23,6 +23,7 @@ const Login = () => {
 
 
     useEffect(()=>{
+        const [cookies, setCookie] = useCookies(['user']);
         // redirec. pra dashboard se ja logado e tentar logar
         if(cookies.user){
             router.push('/dashboard')

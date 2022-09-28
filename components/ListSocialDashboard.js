@@ -12,22 +12,23 @@ const ListSocialDashboard = ({userNickname, setIsCreating}) => {
 
 
     useEffect( ()=>{
+      function fetchAllSocials(){
+        socialController.getSocials(userNickname)
+        .then(res => {
+          if(res.socials.length < 1){
+            console.log('len', socials.length);
+            setIsCreating(true)
+          }
+          setSocials(res.socials);
+        })
+        .catch(err => console.log('err: ', err))
+      }
       
       fetchAllSocials();
       
     },[])
 
-    function fetchAllSocials(){
-      socialController.getSocials(userNickname)
-      .then(res => {
-        if(res.socials.length < 1){
-          console.log('len', socials.length);
-          setIsCreating(true)
-        }
-        setSocials(res.socials);
-      })
-      .catch(err => console.log('err: ', err))
-    }
+    
 
 
   return (
