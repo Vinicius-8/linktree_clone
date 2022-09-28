@@ -14,10 +14,10 @@ import DashboardStyles from '../styles/Dashboard.module.css'
 const Dashboard = () => {
     const [isCreating, setIsCreating] = useState(false)
     const [user, setUser] = useState(null);
-    
+    const [cookies, setCookie] = useCookies(['user']);
 
     useEffect(()=>{
-      const [cookies, setCookie] = useCookies(['user']);
+      
       // verificar se tem alguem logado se nao go to login page      
       
       try {
@@ -28,7 +28,7 @@ const Dashboard = () => {
         setUser(null)
       }
       
-    },[])
+    },[cookies])
 
   return (
     <div className={DashboardStyles.container}>

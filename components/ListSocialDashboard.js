@@ -16,7 +16,6 @@ const ListSocialDashboard = ({userNickname, setIsCreating}) => {
         socialController.getSocials(userNickname)
         .then(res => {
           if(res.socials.length < 1){
-            console.log('len', socials.length);
             setIsCreating(true)
           }
           setSocials(res.socials);
@@ -26,7 +25,7 @@ const ListSocialDashboard = ({userNickname, setIsCreating}) => {
       
       fetchAllSocials();
       
-    },[])
+    },[userNickname])
 
     
 
