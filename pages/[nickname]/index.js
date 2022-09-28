@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 import Error from "next/error"; //<Error statusCode={errorCode} title="page Not Found" />
 
 import socialController from '../../features/controller/socialController'
@@ -10,17 +10,21 @@ const UserPage = () => {
   const [socials, setSocials] = useState([]);
   const [is404, setIs404] = useState(false)
   const router = useRouter()
+  const {nickname} = router.query;
 
-  const {nickname} = router.query
-  
-  
-  useEffect(()=>{
-    if(!nickname)
-      return
+  useEffect(()=>{ 
+    if(!nickname) {
+      return;
+    }
+    function getAllSocials(){      
       socialController.getSocials(nickname)
-        .then(res => {setSocials(res.socials); setIs404(false);})
-        .catch(() =>{ setSocials(null); setIs404(true)})    
-  })
+      .then(res => {setSocials(res.socials); setIs404(false);})
+      .catch(() =>{ setSocials(null); setIs404(true)}) 
+    }
+
+    getAllSocials();
+  }, [nickname])
+
 
 
   return (
@@ -29,11 +33,11 @@ const UserPage = () => {
     { socials ? 
     
     <div className={UserPageStyles.innerContainer}>
-      <span className={UserPageStyles.titleUser}>@{nickname}</span>
+      <span className={UserPageStyles.titleUser}>@{router.query.nickname}</span>
       {socials.map(social => (
 
         <div key={social._id}>
-          <a href={social.link} target="_blank" style={{textDecoration: "inherit", color:  "inherit",cursor: "auto"}}>
+          <a href={social.link} target="_blank" rel="noopener noreferrer" style={{textDecoration: "inherit", color:  "inherit",cursor: "auto"}}>
           <div  className={UserPageStyles.socialCell}>              
                 <span>{social.social}</span>    
           </div></a>    
