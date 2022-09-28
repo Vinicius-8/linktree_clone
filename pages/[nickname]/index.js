@@ -8,13 +8,9 @@ import UserPageStyles from '../../styles/UserPage.module.css'
 
 const UserPage = () => {
   const [socials, setSocials] = useState([]);
-  // const [socials, setSocials] = useState([
-  //   {id:1, social: "Instagram", link: "https://www.instagram.com/vini"},
-  //   {id:2, social: "Facebook", link: "https://www.facebook.com/vinicius-vieria"},
-  //   {id:3, social: "Linkedin", link: "https://www.linkedin.com/vinicius-vieira-de-araujo"}
-  // ]);
   const [is404, setIs404] = useState(false)
   const router = useRouter()
+
   const {nickname} = router.query
   
   
@@ -23,14 +19,8 @@ const UserPage = () => {
       return
       socialController.getSocials(nickname)
         .then(res => {setSocials(res.socials); setIs404(false);})
-        .catch(() =>{ setSocials(null); setIs404(true)})
-    
+        .catch(() =>{ setSocials(null); setIs404(true)})    
   })
-
-
-
-
-
 
 
   return (
@@ -42,13 +32,15 @@ const UserPage = () => {
       <span className={UserPageStyles.titleUser}>@{nickname}</span>
       {socials.map(social => (
 
-      <div key={social._id}>
-        <a href={social.link} target="_blank" style={{textDecoration: "inherit", color:  "inherit",cursor: "auto"}}>
-        <div  className={UserPageStyles.socialCell}>              
-              <span>{social.social}</span>    
-        </div></a>    
-      </div>
-    ))}  
+        <div key={social._id}>
+          <a href={social.link} target="_blank" style={{textDecoration: "inherit", color:  "inherit",cursor: "auto"}}>
+          <div  className={UserPageStyles.socialCell}>              
+                <span>{social.social}</span>    
+          </div></a>    
+        </div>
+      ))}  
+
+      {socials.length < 1 ? <div className={UserPageStyles.emptyPageText}> Nothing yet</div> : <></>}
     
     </div> : 
 

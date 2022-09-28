@@ -1,6 +1,5 @@
 import axios from 'axios'       //frontend
 import { server } from '../../config';
-// axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 
 const API_URL = '/api/social/';
 

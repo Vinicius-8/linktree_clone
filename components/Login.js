@@ -62,13 +62,12 @@ const Login = () => {
                 router.reload()                
             }).catch(error => {
                 const resp = 'user cant be created: '+  error.response.data.message
-                alert(resp);
+                toast(resp, {type: "error"})
             })
 
         }else{
             // apenas login de usuario
             const userData = { email, password }
-            toast("Loading!", {type: "success"})
             const res = authService.login(userData);
             
             res.then(response => {
@@ -76,7 +75,7 @@ const Login = () => {
 
             }).catch(error => {
                 const resp = 'cant login: '+  error.response.data.message
-                alert(resp);
+                toast(resp, {type: "error"})
             })
         }      
     }

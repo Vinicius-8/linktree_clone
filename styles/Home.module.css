@@ -94,3 +94,9 @@
   font-weight: 300;
   margin-left: 15px;
 }
+
+.emptyPageText{
+  font-size: 45pt;
+  margin-top:  200px;
+  color: #a0a0a0;
+}

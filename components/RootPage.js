@@ -7,13 +7,6 @@ import HomeStyles from '../styles/Home.module.css'
 const RootPage = () => {
     const router = useRouter();
     const [users, setUsers] = useState([]);
-    
-    const data = [
-      {id: 1, name: "Fernando Almeida Silva santos", nickname : "fernando"},
-      {id: 2, name: "Vinicius Vieira", nickname : "vinicius"},
-      {id: 3, name: "Carlos Ferreira", nickname : "carlos"},
-      {id: 4, name: "Jorge Moraes", nickname : "jorjim"},
-    ]
 
     
     const res = authService.getAllUsers();
@@ -42,7 +35,9 @@ const RootPage = () => {
                   <div className={HomeStyles.userPageTitle}>{item.name}</div>
                 <div className={HomeStyles.userPageSubtitle}>@{item.nickname}</div>
               </div>
-              ))}
+              ))} 
+
+              {users.length < 1 ? <div className={HomeStyles.emptyPageText}> Nothing yet</div> : <></>}
   
             </div>
           </div>

@@ -29,8 +29,6 @@ const ListSocialDashboard = ({userNickname, setIsCreating}) => {
       .catch(err => console.log('err: ', err))
     }
 
-   
-
 
   return (
     <>

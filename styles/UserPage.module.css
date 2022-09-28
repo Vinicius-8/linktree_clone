@@ -58,3 +58,9 @@
     box-shadow: inset 5px 5px 34px #f2f2f2,
     inset -5px -5px 34px #ffffff;
 }
+
+.emptyPageText{
+    font-size: 45pt;
+    margin-top:  200px;
+    color: #a0a0a0;
+}
