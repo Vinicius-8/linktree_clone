@@ -12,19 +12,17 @@ const RootPage = () => {
 
 
     useEffect(()=>{
-      if(!users)
-      return
-
       function getAllUsers(){
-        const res = authService.getAllUsers(); ////////////////////
-  
-        res.then(res => {setUsers(res.users)})
-          .catch(err => {console.log(err)});
+        const res = authService.getAllUsers();
+        
+          res.then(resp => {setUsers(resp.users)})
+          .catch(err => {console.log(err)});  
+        
       }
 
       getAllUsers();
       
-    }, [users])
+    }, [])
 
     
   
@@ -51,7 +49,7 @@ const RootPage = () => {
               </div>
               ))} 
 
-              {users.length < 1 ? <div className={HomeStyles.emptyPageText}> Nothing yet</div> : <></>}
+              {users.length < 1 ? <div className={HomeStyles.emptyPageText}> Loading...</div> : <></>}
   
             </div>
           </div>
