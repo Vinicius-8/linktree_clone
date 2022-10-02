@@ -6,13 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
-    "heroku-postbuild": "npm run build", 
+    "heroku-postbuild": "npm run build",
     "lint": "next lint"
   },
   "dependencies": {
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "cookies-next": "^2.1.1",
+    "dotenv": "^16.0.3",
     "jose": "^4.9.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.0",
