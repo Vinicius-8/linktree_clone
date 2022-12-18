@@ -48,7 +48,9 @@ const CreateSocial = ({setIsCreating}) => {
     const res = socialController.createSocial(formData, cookies.user.token);
             
       res.then(() => {                
-          router.reload() 
+          router.reload()
+          const msg = 'Success: O item foi criado!' 
+          toast(msg, {type: "success"})   
 
       }).catch(error => {
           const msg = 'Fail: '+  error.response.data.message

@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import {useCookies} from 'react-cookie'
 import { ToastContainer, toast } from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
 import authService from '../features/auth/authService'
-
 import LoginRegister from '../styles/LoginRegister.module.css'
 
 
